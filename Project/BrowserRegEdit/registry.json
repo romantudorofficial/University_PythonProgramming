@@ -1,0 +1,8 @@
+{
+    "HKEY_LOCAL_MACHINE\\Software\\MyApp": {
+        "InstallPath": {
+            "type": "string",
+            "value": "C:\\Program Files\\MyApp"
+        }
+    }
+}

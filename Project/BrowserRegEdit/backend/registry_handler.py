@@ -1,44 +1,32 @@
 import json
 
-registry_file = "registry.json"
+# Assuming registry.json file stores the registry in a JSON format.
+REGISTRY_FILE = 'backend/registry.json'
 
-# Load or initialize the registry
-try:
-    with open(registry_file, "r") as f:
-        registry = json.load(f)
-except FileNotFoundError:
-    registry = {}
+def load_registry():
+    try:
+        with open(REGISTRY_FILE, 'r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return {}
 
-# Save the registry to the JSON file
-def save_registry():
-    with open(registry_file, "w") as f:
-        json.dump(registry, f, indent=4)
+def save_registry(data):
+    with open(REGISTRY_FILE, 'w') as file:
+        json.dump(data, file, indent=4)
 
-# Create a registry key
-def create_key(path):
-    keys = path.split("\\")
-    current = registry
-    for key in keys:
-        if key not in current:
-            current[key] = {}
-        current = current[key]
-    save_registry()
-    return True
+def create_registry_value(key, value_name, value_type, value_data):
+    registry = load_registry()
+    keys = key.split("\\")
+    current_key = registry
 
-# Delete a registry key
-def delete_key(path):
-    keys = path.split("\\")
-    current = registry
-    for key in keys[:-1]:
-        if key not in current:
-            return False
-        current = current[key]
-    if keys[-1] in current:
-        del current[keys[-1]]
-        save_registry()
-        return True
-    return False
+    for part in keys:
+        if part not in current_key:
+            current_key[part] = {}
+        current_key = current_key[part]
 
-# Get the current registry state
-def get_registry():
-    return registry
+    current_key[value_name] = {
+        "type": value_type,
+        "data": value_data
+    }
+    
+    save_registry(registry)

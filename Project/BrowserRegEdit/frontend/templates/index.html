@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registry Editor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- Left panel: Registry tree -->
+        <div class="left-panel">
+            <h2>Registry Tree</h2>
+            <ul>
+                {% for key, subkeys in registry_tree.items() %}
+                    <li>
+                        <strong>{{ key }}</strong>
+                        <ul>
+                            {% for subkey, values in subkeys.items() %}
+                                <li>
+                                    <strong>{{ subkey }}</strong>
+                                    <ul>
+                                        {% for value, data in values.items() %}
+                                            <li>{{ value }}: {{ data }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <!-- Right panel: Create registry value form -->
+        <div class="right-panel">
+            <h2>Create Registry Value</h2>
+            <form method="POST" action="{{ url_for('create_value') }}">
+                <label for="registry_key">Registry Key:</label>
+                <input type="text" id="registry_key" name="registry_key" required><br><br>
+                
+                <label for="value_name">Value Name:</label>
+                <input type="text" id="value_name" name="value_name" required><br><br>
+                
+                <label for="value_type">Value Type:</label>
+                <select id="value_type" name="value_type">
+                    <option value="string">String</option>
+                    <option value="dword">DWORD</option>
+                    <option value="multi-string">Multi-String</option>
+                    <option value="buffer">Buffer</option>
+                </select><br><br>
+                
+                <label for="value_data">Value Data:</label>
+                <input type="text" id="value_data" name="value_data" required><br><br>
+                
+                <button type="submit">Create Value</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
