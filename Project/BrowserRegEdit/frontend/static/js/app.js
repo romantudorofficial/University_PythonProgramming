@@ -1,18 +1,18 @@
 $(document).ready(function()
 {
-    // Handle form submission
+    // Handle the form submission.
     $('#create-registry-form').on('submit', function(e)
     {
         e.preventDefault();
         
-        // Get values from the form
+        // Get the values from the form.
         const key = $('#key').val();
         const value = $('#value').val();
         const type = $('#type').val();
         const permissions = $('#permissions').val();
         const lastModified = $('#last_modified').val();
 
-        // Send the data to the backend
+        // Send the data to the Back-End.
         $.ajax(
             {
                 url: '/create_registry',

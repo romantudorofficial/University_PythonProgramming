@@ -9,17 +9,17 @@ body
 .container
 {
     display: flex;
-    justify-content: space-between; /* Distributes the columns with space between */
-    align-items: flex-start; /* Aligns the items to the top */
+    justify-content: space-between;
+    align-items: flex-start;
     width: 100%;
-    gap: 20px; /* Adds space between columns */
+    gap: 20px;
     padding: 20px;
 }
 
 
 .left-panel, .right-panel
 {
-    flex: 1; /* Each panel takes equal width */
+    flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
     height: 600px;
@@ -65,18 +65,17 @@ form button:hover
 
 
 
-/* Ensure content stays responsive */
 @media (max-width: 768px)
 {
     .container
     {
-        flex-direction: column; /* Stacks the panels in a column on smaller screens */
+        flex-direction: column;
     }
 
 
     .left-panel, .right-panel
     {
-        width: 100%; /* Each panel will take full width when stacked */
+        width: 100%;
         margin-bottom: 20px;
     }
 }

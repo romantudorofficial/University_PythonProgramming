@@ -1,3 +1,7 @@
+"""
+    This module is responsible for handling the registry operations.
+"""
+
 import json
 
 REGISTRY_FILE = 'backend/registry.json'
@@ -5,6 +9,16 @@ REGISTRY_FILE = 'backend/registry.json'
 
 
 def load_registry ():
+
+    """
+        This function is responsible for loading the registry.
+
+        Parameters:
+            None
+
+        Returns:
+            data: the registry data
+    """
 
     try:
         with open(REGISTRY_FILE, 'r') as file:
@@ -17,12 +31,35 @@ def load_registry ():
 
 def save_registry (data):
 
+    """
+        This function is responsible for saving the registry.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+    """
+
     with open(REGISTRY_FILE, 'w') as file:
         json.dump(data, file, indent = 4)
 
 
 
 def create_registry_value (key, value_name, value_type, value_data):
+
+    """
+        This function is responsible for creating a registry value.
+
+        Parameters:
+            key: the registry key
+            value_name: the value name
+            value_type: the value type
+            value_data: the value data
+
+        Returns:
+            None
+    """
 
     registry = load_registry()
     keys = key.split("\\")
@@ -46,6 +83,17 @@ def create_registry_value (key, value_name, value_type, value_data):
 
 def create_registry_key (key_path, new_key_name):
 
+    """
+        This function is responsible for creating a registry key.
+
+        Parameters:
+            key_path: the registry key path
+            new_key_name: the new key name
+
+        Returns:
+            None
+    """
+
     registry = load_registry()
     keys = key_path.split("\\")
     current_key = registry
@@ -68,6 +116,17 @@ def create_registry_key (key_path, new_key_name):
 
 
 def rename_registry_key (old_key, new_key):
+
+    """
+        This function is responsible for renaming a registry key.
+
+        Parameters:
+            old_key: the old key name
+            new_key: the new key name
+
+        Returns:
+            None
+    """
 
     registry = load_registry()
     keys = old_key.split("\\")
@@ -94,6 +153,18 @@ def rename_registry_key (old_key, new_key):
 
 def rename_registry_value (registry_key, old_value_name, new_value_name):
 
+    """
+        This function is responsible for renaming a registry value.
+
+        Parameters:
+            registry_key: the registry key
+            old_value_name: the old value name
+            new_value_name: the new value name
+
+        Returns:
+            None
+    """
+
     registry = load_registry()
     keys = registry_key.split("\\")
     current_key = registry
@@ -115,6 +186,16 @@ def rename_registry_value (registry_key, old_value_name, new_value_name):
 
 
 def delete_registry_key (registry_key):
+
+    """
+        This function is responsible for deleting a registry key.
+
+        Parameters:
+            registry_key: the registry key
+
+        Returns:
+            None
+    """
 
     registry = load_registry()
     keys = registry_key.split("\\")
@@ -138,7 +219,18 @@ def delete_registry_key (registry_key):
 
 
 
-def delete_registry_value(registry_key, value_name):
+def delete_registry_value (registry_key, value_name):
+
+    """
+        This function is responsible for deleting a registry value.
+
+        Parameters:
+            registry_key: the registry key
+            value_name: the value name
+
+        Returns:
+            None
+    """
 
     registry = load_registry()
     keys = registry_key.split("\\")
@@ -155,5 +247,44 @@ def delete_registry_value(registry_key, value_name):
         del current_key[value_name]
         save_registry(registry)
 
+    else:
+        raise KeyError(f"Value '{value_name}' does not exist in key '{registry_key}'.")
+
+
+
+def edit_registry_value (registry_key, value_name, new_value):
+
+    """
+        This function is responsible for editing a registry value.
+
+        Parameters:
+            registry_key: the registry key
+            value_name: the value name
+            new_value: the new value
+
+        Returns:
+            None
+    """
+
+    registry = load_registry()
+    keys = registry_key.split("\\")
+    current_key = registry
+
+    for part in keys:
+
+        if part not in current_key:
+            raise KeyError(f"Key '{registry_key}' does not exist.")
+        
+        current_key = current_key[part]
+
+    if value_name in current_key:
+
+        current_key[value_name] = {
+            "type": "string",
+            "data": new_value
+        }
+
+        save_registry(registry)
+        
     else:
         raise KeyError(f"Value '{value_name}' does not exist in key '{registry_key}'.")

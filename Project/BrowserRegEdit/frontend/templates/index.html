@@ -169,7 +169,30 @@
 
             </div>
 
+            <div class = "right-panel">
+
+                <!-- Edit Registry Value Form -->
+                <h2>Edit Registry Value</h2>
+
+                <form method = "POST" action = "{{ url_for('edit_value') }}">
+
+                    <label for = "registry_key">Registry Key Path:</label>
+                    <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                    <label for = "value_name">Value Name:</label>
+                    <input type = "text" id = "value_name" name = "value_name" placeholder = "ValueName" required><br><br>
+
+                    <label for = "new_value">New Value:</label>
+                    <input type = "text" id = "new_value" name = "new_value" placeholder = "NewValue" required><br><br>
+
+                    <button type = "submit">Edit Value</button>
+
+                </form>
+
+            </div>
+
         </div>
+
     </body>
 
 </html>
