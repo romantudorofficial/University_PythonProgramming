@@ -57,7 +57,24 @@ def rename_key():
 
         return redirect(url_for('index'))
 
-    
+
+
+@app.route('/rename_registry_value', methods=['POST'])
+def rename_value():
+    if request.method == 'POST':
+        registry_key = request.form['registry_key']
+        old_value_name = request.form['old_value_name']
+        new_value_name = request.form['new_value_name']
+
+        try:
+            rename_registry_value(registry_key, old_value_name, new_value_name)
+        except KeyError as e:
+            return f"Error: {str(e)}", 400
+
+        return redirect(url_for('index'))
+
+
+
 
 def get_registry_tree():
     """Load the registry tree from the JSON file and return it."""

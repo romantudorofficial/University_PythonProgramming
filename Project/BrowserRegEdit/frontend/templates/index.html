@@ -91,6 +91,23 @@
             </form>
         </div>
         
+        <div class="right-panel">
+            <!-- Rename Registry Value Form -->
+            <h2>Rename Registry Value</h2>
+            <form method="POST" action="{{ url_for('rename_value') }}">
+                <label for="registry_key">Registry Key:</label>
+                <input type="text" id="registry_key" name="registry_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                <label for="old_value_name">Old Value Name:</label>
+                <input type="text" id="old_value_name" name="old_value_name" placeholder="OldValueName" required><br><br>
+
+                <label for="new_value_name">New Value Name:</label>
+                <input type="text" id="new_value_name" name="new_value_name" placeholder="NewValueName" required><br><br>
+
+                <button type="submit">Rename Value</button>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>
