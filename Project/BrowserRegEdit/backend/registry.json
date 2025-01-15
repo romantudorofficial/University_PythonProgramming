@@ -1,36 +1,21 @@
 {
     "HKEY_LOCAL_MACHINE": {
         "Software": {
-            "MySoftware": {
-                "MyStringValue": {
-                    "type": "string",
-                    "data": "Sample String Value"
+            "MyApp": {
+                "Version": "1.0",
+                "Settings": {
+                    "EnableFeatureX": "True"
                 }
             }
         }
     },
-    "sdfsd": {
-        "sdfsdf": {
-            "type": "dword",
-            "data": "sdfsdf"
-        }
+    "ffdgdfg": {
+        "sgdf": {}
     },
-    "fgdfg": {
-        "value": "fdgdfgd",
-        "type": "string",
-        "permissions": "dfgdfg",
-        "last_modified": "2025-01-09"
-    },
-    "dsfsdf": {
-        "value": "sdfsd",
-        "type": "sdfsdf",
-        "permissions": "sdfsdf",
-        "last_modified": "sdfsdf"
-    },
-    "asdasd": {
-        "asdad": {
+    "sdf": {
+        "sdf": {
             "type": "string",
-            "data": "asdas"
+            "data": "sdf"
         }
     }
 }
