@@ -1,10 +1,13 @@
-body {
+body
+{
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
-.container {
+
+.container
+{
     display: flex;
     justify-content: space-between; /* Distributes the columns with space between */
     align-items: flex-start; /* Aligns the items to the top */
@@ -13,7 +16,9 @@ body {
     padding: 20px;
 }
 
-.left-panel, .right-panel {
+
+.left-panel, .right-panel
+{
     flex: 1; /* Each panel takes equal width */
     padding: 10px;
     border: 1px solid #ccc;
@@ -21,22 +26,30 @@ body {
     overflow-y: auto;
 }
 
-h2 {
+
+h2
+{
     color: #333;
 }
 
-ul {
+
+ul
+{
     list-style-type: none;
     padding-left: 20px;
 }
 
-form input, form select {
+
+form input, form select
+{
     width: 100%;
     padding: 8px;
     margin: 5px 0;
 }
 
-form button {
+
+form button
+{
     padding: 10px;
     background-color: #4CAF50;
     color: white;
@@ -44,17 +57,25 @@ form button {
     cursor: pointer;
 }
 
-form button:hover {
+
+form button:hover
+{
     background-color: #45a049;
 }
 
+
+
 /* Ensure content stays responsive */
-@media (max-width: 768px) {
-    .container {
+@media (max-width: 768px)
+{
+    .container
+    {
         flex-direction: column; /* Stacks the panels in a column on smaller screens */
     }
 
-    .left-panel, .right-panel {
+
+    .left-panel, .right-panel
+    {
         width: 100%; /* Each panel will take full width when stacked */
         margin-bottom: 20px;
     }
