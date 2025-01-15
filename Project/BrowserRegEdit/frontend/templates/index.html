@@ -76,6 +76,20 @@
                 <button type="submit">Create Key</button>
             </form>
         </div>
+
+        <div class="right-panel">
+            <!-- Rename Registry Key Form -->
+            <h2>Rename Registry Key</h2>
+            <form method="POST" action="{{ url_for('rename_key') }}">
+                <label for="old_key">Old Key:</label>
+                <input type="text" id="old_key" name="old_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\OldKey" required><br><br>
+
+                <label for="new_key">New Key:</label>
+                <input type="text" id="new_key" name="new_key" placeholder="NewKey" required><br><br>
+
+                <button type="submit">Rename Key</button>
+            </form>
+        </div>
         
     </div>
 </body>

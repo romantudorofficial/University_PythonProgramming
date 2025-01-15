@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from backend.registry_handler import create_registry_value, create_registry_key
+from backend.registry_handler import *
 import json
 
 
@@ -40,6 +40,20 @@ def create_key():
             create_registry_key(key_path, new_key_name)
         except ValueError as e:
             return str(e), 400  # Return an error if the key already exists
+
+        return redirect(url_for('index'))
+
+
+@app.route('/rename_registry_key', methods=['POST'])
+def rename_key():
+    if request.method == 'POST':
+        old_key = request.form['old_key']
+        new_key = request.form['new_key']
+
+        try:
+            rename_registry_key(old_key, new_key)
+        except KeyError as e:
+            return f"Error: {str(e)}", 400
 
         return redirect(url_for('index'))
 

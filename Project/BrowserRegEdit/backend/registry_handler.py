@@ -43,7 +43,7 @@ def create_registry_value (key, value_name, value_type, value_data):
     
     save_registry(registry)
 
-    
+
 
 def create_registry_key(key_path, new_key_name):
     registry = load_registry()
@@ -61,3 +61,26 @@ def create_registry_key(key_path, new_key_name):
         current_key[new_key_name] = {}
 
     save_registry(registry)
+
+
+def rename_registry_key(old_key, new_key):
+    """
+    Renames a registry key from `old_key` to `new_key`.
+    """
+    registry = load_registry()
+    keys = old_key.split("\\")
+    current_key = registry
+
+    # Traverse the tree to find the parent of the key to rename
+    for part in keys[:-1]:
+        if part not in current_key:
+            raise KeyError(f"Key '{old_key}' does not exist.")
+        current_key = current_key[part]
+
+    # Rename the key
+    key_to_rename = keys[-1]
+    if key_to_rename in current_key:
+        current_key[new_key] = current_key.pop(key_to_rename)
+        save_registry(registry)
+    else:
+        raise KeyError(f"Key '{old_key}' does not exist.")
