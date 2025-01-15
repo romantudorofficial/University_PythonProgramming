@@ -1,21 +1,11 @@
 {
     "HKEY_LOCAL_MACHINE": {
-        "SoftwareSoftware": {
-            "MyApp": {
-                "Version": "1.0",
-                "Settings": {
-                    "EnableFeatureX": "True"
-                }
-            }
+        "ffdgdfg": {
+            "type": "string",
+            "data": "ffdgdfg"
         }
     },
     "ffdgdfg": {
         "sgdf": {}
-    },
-    "sdfsdsdfsdfsdf": {
-        "sdf": {
-            "type": "string",
-            "data": "sdf"
-        }
     }
 }

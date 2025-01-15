@@ -107,3 +107,46 @@ def rename_registry_value(registry_key, old_value_name, new_value_name):
         save_registry(registry)
     else:
         raise KeyError(f"Value '{old_value_name}' does not exist in key '{registry_key}'.")
+
+
+def delete_registry_key(registry_key):
+    """
+    Deletes an entire registry key.
+    """
+    registry = load_registry()
+    keys = registry_key.split("\\")
+    current_key = registry
+
+    for part in keys[:-1]:
+        if part not in current_key:
+            raise KeyError(f"Key '{registry_key}' does not exist.")
+        current_key = current_key[part]
+
+    # Delete the target key
+    last_key = keys[-1]
+    if last_key in current_key:
+        del current_key[last_key]
+        save_registry(registry)
+    else:
+        raise KeyError(f"Key '{registry_key}' does not exist.")
+
+
+def delete_registry_value(registry_key, value_name):
+    """
+    Deletes a specific value within a registry key.
+    """
+    registry = load_registry()
+    keys = registry_key.split("\\")
+    current_key = registry
+
+    for part in keys:
+        if part not in current_key:
+            raise KeyError(f"Key '{registry_key}' does not exist.")
+        current_key = current_key[part]
+
+    # Delete the value
+    if value_name in current_key:
+        del current_key[value_name]
+        save_registry(registry)
+    else:
+        raise KeyError(f"Value '{value_name}' does not exist in key '{registry_key}'.")

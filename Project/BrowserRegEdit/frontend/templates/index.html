@@ -108,6 +108,30 @@
             </form>
         </div>
 
+        <div class="right-panel">
+            <!-- Delete Registry Key Form -->
+            <h2>Delete Registry Key</h2>
+            <form method="POST" action="{{ url_for('delete_key') }}">
+                <label for="registry_key">Registry Key:</label>
+                <input type="text" id="registry_key" name="registry_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+                <button type="submit">Delete Key</button>
+            </form>
+        </div>
+
+        <div class="right-panel">
+            <!-- Delete Registry Value Form -->
+            <h2>Delete Registry Value</h2>
+            <form method="POST" action="{{ url_for('delete_value') }}">
+                <label for="registry_key">Registry Key:</label>
+                <input type="text" id="registry_key" name="registry_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                <label for="value_name">Value Name:</label>
+                <input type="text" id="value_name" name="value_name" placeholder="ValueName" required><br><br>
+
+                <button type="submit">Delete Value</button>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>

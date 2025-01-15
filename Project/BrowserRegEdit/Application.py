@@ -75,6 +75,34 @@ def rename_value():
 
 
 
+@app.route('/delete_registry_key', methods=['POST'])
+def delete_key():
+    if request.method == 'POST':
+        registry_key = request.form['registry_key']
+
+        try:
+            delete_registry_key(registry_key)
+        except KeyError as e:
+            return f"Error: {str(e)}", 400
+
+        return redirect(url_for('index'))
+
+
+
+@app.route('/delete_registry_value', methods=['POST'])
+def delete_value():
+    if request.method == 'POST':
+        registry_key = request.form['registry_key']
+        value_name = request.form['value_name']
+
+        try:
+            delete_registry_value(registry_key, value_name)
+        except KeyError as e:
+            return f"Error: {str(e)}", 400
+
+        return redirect(url_for('index'))
+
+
 
 def get_registry_tree():
     """Load the registry tree from the JSON file and return it."""
