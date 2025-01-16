@@ -1,29 +1,62 @@
 {
     "HKEY_LOCAL_MACHINE": {
-        "ffdgdfg": {
+        "Microsoft": {
             "type": "string",
-            "data": "55"
+            "data": "Windows"
         }
     },
-    "ffdgdfg": {
-        "sgdf": {}
-    },
-    "sdfdf": {
-        "sdfsd": {
+    "HKEY_CURRENT_USER": {
+        "Google Chrome": {
             "type": "string",
-            "data": "sdf"
+            "data": "91.0"
         }
     },
-    "fgdfg": {
-        "sdsad": {
+    "HKEY_CLASSES_ROOT": {
+        "txt": {
             "type": "string",
-            "data": "sada"
+            "data": "Notepad"
         }
     },
-    "sdfs": {
-        "ssssssssss": {
+    "HKEY_USERS": {
+        "Admin": {
             "type": "string",
-            "data": "sssssssssssssss"
+            "data": "Administrator"
+        }
+    },
+    "HKEY_LOCAL_MACHINE\\SOFTWARE": {
+        "MyApp": {
+            "type": "string",
+            "data": "1.0.0"
+        }
+    },
+    "HKEY_LOCAL_MACHINE\\SYSTEM": {
+        "Path": {
+            "type": "string",
+            "data": "C:\\Windows\\System32"
+        }
+    },
+    "HKEY_CURRENT_USER\\Software": {
+        "Visual Studio": {
+            "type": "string",
+            "data": "2019"
+        }
+    },
+    "HKEY_LOCAL_MACHINE\\Hardware": {
+        "Processor": {
+            "type": "string",
+            "data": "Intel i7"
+        }
+    },
+    "HKEY_CLASSES_ROOT\\HTML": {
+        "Default": {
+            "type": "string",
+            "data": "Chrome"
+        }
+    },
+    "HKEY_CURRENT_USER\\Network": {
+        "Wi-Fi": {
+            "type": "string",
+            "data": "HomeNetwork"
         }
     }
 }

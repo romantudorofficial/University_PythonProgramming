@@ -16,208 +16,223 @@
 
     <body>
 
-        <div class = "container">
+        <div style = "display: flex;">
 
-            <!-- Registry Tree -->
-            <div class = "left-panel">
+            <!-- Tree -->
+            <div style = "flex: 1; padding: 10px; border: 1px solid black;">
 
-                <h2>Registry Tree</h2>
+                <!-- Registry Tree -->
+                <div class = "left-panel">
 
-                <ul>
-                    {% for key, subkeys in registry_tree.items() %}
-                        <li>
-                            <strong>{{ key }}</strong>
-                            <ul>
-                                {% for subkey, values in subkeys.items() %}
-                                    <li>
-                                        <strong>{{ subkey }}</strong>
-                                        <ul>
-                                            {% for value, data in values.items() %}
-                                                <li>{{ value }}: {{ data }}</li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                    {% endfor %}
-                </ul>
-                
-            </div>
-            
-            <!-- Right panel: Create registry value form -->
-            <div class = "right-panel">
-
-                <h2>Create Registry Value</h2>
-
-                <form method = "POST" action = "{{ url_for('create_value') }}">
-
-                    <label for = "registry_key">Registry Key:</label>
-                    <input type = "text" id = "registry_key" name = "registry_key" required><br><br>
-                    
-                    <label for = "value_name">Value Name:</label>
-                    <input type = "text" id = "value_name" name = "value_name" required><br><br>
-                    
-                    <label for = "value_type">Value Type:</label>
-                    <select id = "value_type" name = "value_type">
-                        <option value = "string">String</option>
-                        <option value = "dword">DWORD</option>
-                        <option value = "multi-string">Multi-String</option>
-                        <option value = "buffer">Buffer</option>
-                    </select><br><br>
-                    
-                    <label for = "value_data">Value Data:</label>
-                    <input type = "text" id = "value_data" name = "value_data" required><br><br>
-                    
-                    <button type = "submit">Create Value</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Form for creating a registry key -->
-                <h2>Create Registry Key</h2>
-
-                <form method = "POST" action = "{{ url_for('create_key') }}">
-
-                    <label for = "key_path">Parent Key Path:</label>
-                    <input type = "text" id = "key_path" name = "key_path" placeholder = "e.g., HKEY_LOCAL_MACHINE\\Software" required><br><br>
-                    
-                    <label for = "new_key_name">New Key Name:</label>
-                    <input type = "text" id = "new_key_name" name = "new_key_name" placeholder = "e.g., MyNewKey" required><br><br>
-                    
-                    <button type = "submit">Create Key</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Rename Registry Key Form -->
-                <h2>Rename Registry Key</h2>
-
-                <form method = "POST" action="{{ url_for('rename_key') }}">
-
-                    <label for = "old_key">Old Key:</label>
-                    <input type = "text" id = "old_key" name = "old_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\OldKey" required><br><br>
-
-                    <label for = "new_key">New Key:</label>
-                    <input type = "text" id = "new_key" name = "new_key" placeholder = "NewKey" required><br><br>
-
-                    <button type = "submit">Rename Key</button>
-
-                </form>
-
-            </div>
-            
-            <div class = "right-panel">
-
-                <!-- Rename Registry Value Form -->
-                <h2>Rename Registry Value</h2>
-
-                <form method = "POST" action = "{{ url_for('rename_value') }}">
-
-                    <label for = "registry_key">Registry Key:</label>
-                    <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
-
-                    <label for = "old_value_name">Old Value Name:</label>
-                    <input type = "text" id = "old_value_name" name = "old_value_name" placeholder = "OldValueName" required><br><br>
-
-                    <label for = "new_value_name">New Value Name:</label>
-                    <input type = "text" id = "new_value_name" name = "new_value_name" placeholder = "NewValueName" required><br><br>
-
-                    <button type = "submit">Rename Value</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Delete Registry Key Form -->
-                <h2>Delete Registry Key</h2>
-                
-                <form method = "POST" action = "{{ url_for('delete_key') }}">
-
-                    <label for = "registry_key">Registry Key:</label>
-                    <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
-                    <button type = "submit">Delete Key</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Delete Registry Value Form -->
-                <h2>Delete Registry Value</h2>
-
-                <form method = "POST" action = "{{ url_for('delete_value') }}">
-
-                    <label for = "registry_key">Registry Key:</label>
-                    <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
-
-                    <label for = "value_name">Value Name:</label>
-                    <input type = "text" id = "value_name" name = "value_name" placeholder = "ValueName" required><br><br>
-
-                    <button type = "submit">Delete Value</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Edit Registry Value Form -->
-                <h2>Edit Registry Value</h2>
-
-                <form method = "POST" action = "{{ url_for('edit_value') }}">
-
-                    <label for = "registry_key">Registry Key Path:</label>
-                    <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
-
-                    <label for = "value_name">Value Name:</label>
-                    <input type = "text" id = "value_name" name = "value_name" placeholder = "ValueName" required><br><br>
-
-                    <label for = "new_value">New Value:</label>
-                    <input type = "text" id = "new_value" name = "new_value" placeholder = "NewValue" required><br><br>
-
-                    <button type = "submit">Edit Value</button>
-
-                </form>
-
-            </div>
-
-            <div class = "right-panel">
-
-                <!-- Search Form -->
-                <h2>Search Registry</h2>
-
-                <form method = "POST">
-
-                    <label for = "search_term">Search Term:</label>
-                    <input type = "text" id = "search_term" name = "search_term" required>
-                    <button type = "submit">Search</button>
-
-                </form>
-
-                <!-- Display Search Results -->
-                {% if search_results %}
-
-                    <h3>Search Results:</h3>
+                    <h2>Registry Tree</h2>
 
                     <ul>
-
-                        {% for result in search_results %}
-                            <li>{{ result }}</li>
+                        {% for key, subkeys in registry_tree.items() %}
+                            <li>
+                                <strong>{{ key }}</strong>
+                                <ul>
+                                    {% for subkey, values in subkeys.items() %}
+                                        <li>
+                                            <strong>{{ subkey }}</strong>
+                                            <ul>
+                                                {% for value, data in values.items() %}
+                                                    <li>{{ value }}: {{ data }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         {% endfor %}
-
                     </ul>
+                    
+                </div>
 
-                {% endif %}
+            </div>
+
+            <!-- Form 1 -->
+            <div style = "flex: 1; padding: 10px; border: 1px solid black;">
+
+                <!-- Right panel: Create registry value form -->
+                <div class = "right-panel">
+
+                    <h2>Create Registry Value</h2>
+
+                    <form method = "POST" action = "{{ url_for('create_value') }}">
+
+                        <label for = "registry_key">Registry Key:</label>
+                        <input type = "text" id = "registry_key" name = "registry_key" required><br><br>
+                        
+                        <label for = "value_name">Value Name:</label>
+                        <input type = "text" id = "value_name" name = "value_name" required><br><br>
+                        
+                        <label for = "value_type">Value Type:</label>
+                        <select id = "value_type" name = "value_type">
+                            <option value = "string">String</option>
+                            <option value = "dword">DWORD</option>
+                            <option value = "multi-string">Multi-String</option>
+                            <option value = "buffer">Buffer</option>
+                        </select><br><br>
+                        
+                        <label for = "value_data">Value Data:</label>
+                        <input type = "text" id = "value_data" name = "value_data" required><br><br>
+                        
+                        <button type = "submit">Create Value</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Form for creating a registry key -->
+                    <h2>Create Registry Key</h2>
+
+                    <form method = "POST" action = "{{ url_for('create_key') }}">
+
+                        <label for = "key_path">Parent Key Path:</label>
+                        <input type = "text" id = "key_path" name = "key_path" placeholder = "e.g., HKEY_LOCAL_MACHINE\\Software" required><br><br>
+                        
+                        <label for = "new_key_name">New Key Name:</label>
+                        <input type = "text" id = "new_key_name" name = "new_key_name" placeholder = "e.g., MyNewKey" required><br><br>
+                        
+                        <button type = "submit">Create Key</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Rename Registry Key Form -->
+                    <h2>Rename Registry Key</h2>
+
+                    <form method = "POST" action="{{ url_for('rename_key') }}">
+
+                        <label for = "old_key">Old Key:</label>
+                        <input type = "text" id = "old_key" name = "old_key" placeholder="HKEY_LOCAL_MACHINE\\Software\\OldKey" required><br><br>
+
+                        <label for = "new_key">New Key:</label>
+                        <input type = "text" id = "new_key" name = "new_key" placeholder = "NewKey" required><br><br>
+
+                        <button type = "submit">Rename Key</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Rename Registry Value Form -->
+                    <h2>Rename Registry Value</h2>
+
+                    <form method = "POST" action = "{{ url_for('rename_value') }}">
+
+                        <label for = "registry_key">Registry Key:</label>
+                        <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                        <label for = "old_value_name">Old Value Name:</label>
+                        <input type = "text" id = "old_value_name" name = "old_value_name" placeholder = "OldValueName" required><br><br>
+
+                        <label for = "new_value_name">New Value Name:</label>
+                        <input type = "text" id = "new_value_name" name = "new_value_name" placeholder = "NewValueName" required><br><br>
+
+                        <button type = "submit">Rename Value</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            <!-- Form 2 -->
+            <div style = "flex: 1; padding: 10px; border: 1px solid black;">
+
+                <div class = "right-panel">
+
+                    <!-- Delete Registry Key Form -->
+                    <h2>Delete Registry Key</h2>
+                    
+                    <form method = "POST" action = "{{ url_for('delete_key') }}">
+
+                        <label for = "registry_key">Registry Key:</label>
+                        <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+                        <button type = "submit">Delete Key</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Delete Registry Value Form -->
+                    <h2>Delete Registry Value</h2>
+
+                    <form method = "POST" action = "{{ url_for('delete_value') }}">
+
+                        <label for = "registry_key">Registry Key:</label>
+                        <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                        <label for = "value_name">Value Name:</label>
+                        <input type = "text" id = "value_name" name = "value_name" placeholder = "ValueName" required><br><br>
+
+                        <button type = "submit">Delete Value</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Edit Registry Value Form -->
+                    <h2>Edit Registry Value</h2>
+
+                    <form method = "POST" action = "{{ url_for('edit_value') }}">
+
+                        <label for = "registry_key">Registry Key Path:</label>
+                        <input type = "text" id = "registry_key" name = "registry_key" placeholder = "HKEY_LOCAL_MACHINE\\Software\\MyApp" required><br><br>
+
+                        <label for = "value_name">Value Name:</label>
+                        <input type = "text" id = "value_name" name = "value_name" placeholder = "ValueName" required><br><br>
+
+                        <label for = "new_value">New Value:</label>
+                        <input type = "text" id = "new_value" name = "new_value" placeholder = "NewValue" required><br><br>
+
+                        <button type = "submit">Edit Value</button>
+
+                    </form>
+
+                </div>
+
+                <div class = "right-panel">
+
+                    <!-- Search Form -->
+                    <h2>Search Registry</h2>
+
+                    <form method = "POST">
+
+                        <label for = "search_term">Search Term:</label>
+                        <input type = "text" id = "search_term" name = "search_term" required>
+                        <button type = "submit">Search</button>
+
+                    </form>
+
+                    <!-- Display Search Results -->
+                    {% if search_results %}
+
+                        <h3>Search Results:</h3>
+
+                        <ul>
+
+                            {% for result in search_results %}
+                                <li>{{ result }}</li>
+                            {% endfor %}
+
+                        </ul>
+
+                    {% endif %}
+
+                </div>
 
             </div>
 
