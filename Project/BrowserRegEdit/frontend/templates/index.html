@@ -191,6 +191,36 @@
 
             </div>
 
+            <div class = "right-panel">
+
+                <!-- Search Form -->
+                <h2>Search Registry</h2>
+
+                <form method = "POST">
+
+                    <label for = "search_term">Search Term:</label>
+                    <input type = "text" id = "search_term" name = "search_term" required>
+                    <button type = "submit">Search</button>
+
+                </form>
+
+                <!-- Display Search Results -->
+                {% if search_results %}
+
+                    <h3>Search Results:</h3>
+
+                    <ul>
+
+                        {% for result in search_results %}
+                            <li>{{ result }}</li>
+                        {% endfor %}
+
+                    </ul>
+
+                {% endif %}
+
+            </div>
+
         </div>
 
     </body>

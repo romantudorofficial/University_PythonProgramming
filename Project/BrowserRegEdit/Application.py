@@ -2,12 +2,13 @@
     This module is responsible for handling the Front-End and Back-End communication.
 """
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import json
 
 from backend.registry_handler import *
 
 application = Flask(__name__, template_folder = 'frontend/templates')
+application.secret_key = 'regedit'
 
 
 
@@ -228,6 +229,35 @@ def edit_value ():
             return f"Error: {str(e)}", 400
 
         return redirect(url_for('index'))
+
+
+
+@application.route('/', methods = ['GET', 'POST'])
+
+def search_value ():
+
+    """
+        This function is responsible for handling the search functionality.
+        
+        Parameters:
+            None
+            
+        Returns:
+            render_template: renders the index.html template
+    """
+    
+    registry_tree = load_registry()
+    search_results = []
+
+    if request.method == 'POST':
+
+        search_term = request.form.get('search_term', '')
+
+        if search_term:
+            search_results = search_registry(registry_tree, search_term)
+            session['search_results'] = search_results
+
+    return render_template('index.html', registry_tree = registry_tree, search_results = session.get('search_results', []))
 
 
 

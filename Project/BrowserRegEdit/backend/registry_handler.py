@@ -288,3 +288,48 @@ def edit_registry_value (registry_key, value_name, new_value):
         
     else:
         raise KeyError(f"Value '{value_name}' does not exist in key '{registry_key}'.")
+
+
+
+def search_registry (registry, search_term):
+
+    """
+        This function searches for a value in the registry.
+
+        Parameters:
+            registry: the current state of the registry
+            search_term: the term to search for
+
+        Returns:
+            list: a list of tuples with matching registry paths and data
+    """
+
+    results = []
+
+
+    def recursive_search (current_registry, path = ""):
+
+        """
+            This function recursively searches through the registry.
+            
+            Parameters:
+                current_registry: current level of the registry
+                path: the current path in the registry
+
+            Returns:
+                None
+        """
+
+        for key, value in current_registry.items():
+            current_path = f"{path}\\{key}" if path else key
+
+            if isinstance (value, dict):
+                recursive_search(value, current_path)
+
+            elif isinstance (value, str) and key == "data" and search_term in value:
+                results.append((current_path, value))
+
+
+    recursive_search(registry)
+
+    return results
